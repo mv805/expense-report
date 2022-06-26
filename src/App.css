@@ -1,6 +1,9 @@
 .App {
   background-color: rgb(37, 38, 44);
   height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 body {
