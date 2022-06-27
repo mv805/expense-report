@@ -1,30 +1,20 @@
 import React from 'react';
 import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
+import idGenerator from '../../utilities/id-generator';
 
-
+const idGen = idGenerator();
 
 const NewExpense = (props) => {
-
-    let idCounter = 0;
-    let idValue;
 
     const saveExpenseDataHandler = (enteredExpenseData) => {
 
         const expenseData = {
             ...enteredExpenseData,
-            id: getID(),
+            id: idGen.getID(),
         };
 
         props.onAddExpense(expenseData);
-    };
-
-    const getID = () => {
-
-        idCounter++;
-        idValue = `e${ idCounter }`;
-        return idValue;
-
     };
 
     return (

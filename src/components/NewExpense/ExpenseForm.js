@@ -9,6 +9,8 @@ const ExpenseForm = (props) => {
         enteredDate: '',
     });
 
+    const [activeState, setActiveState] = useState(false);
+
     const fieldChangeHandler = (e, field) => {
 
         setUserInput((prevState) => {
@@ -36,13 +38,26 @@ const ExpenseForm = (props) => {
 
         const expenseData = {
             title: userInput.enteredTitle,
-            amount: userInput.enteredAmount,
+            amount: +userInput.enteredAmount,
             date: new Date(userInput.enteredDate),
         };
 
         props.onSaveExpenseData(expenseData);
         clearInputs();
+        setActiveState(false);
     };
+
+    if (!activeState) {
+        return (
+            <form onSubmit={ submitHandler }>
+                <div className="new-expense__actions">
+                    <button type="button" onClick={ () => {
+                        setActiveState(true);
+                    } }>Add New Expense</button>
+                </div>
+            </form>
+        );
+    }
 
     return (
         <form onSubmit={ submitHandler }>
@@ -66,9 +81,10 @@ const ExpenseForm = (props) => {
                     } } />
                 </div>
             </div>
-            <div className="new-expense__actions">
-                <button type="submit" onClick={ () => {
-                } }>Add Expense</button>
+            <div className="new-expense__actions-active">
+                <button type="button" onClick={ () => {
+                setActiveState(false)} }>Cancel</button>
+                <button type="submit" onClick={submitHandler}>Add Expense</button>
             </div>
         </form>
     );

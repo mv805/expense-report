@@ -10,3 +10,7 @@
     margin: 0;
     color: white;
 }
+
+.expenses p {
+    color: rgb(100, 100, 100);
+}
